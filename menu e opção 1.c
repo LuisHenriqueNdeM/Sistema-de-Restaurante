@@ -1,12 +1,23 @@
 #include <stdio.h>
 
+typedef struct{
+char nome[30];
+int codigo[10];
+char categoria[20];
+float preco;
+} Produto;
+
+void Cadastrar(){
+
+}
+
 int main(){
 
     int opcao;
 
     do{
         printf("\n========================================\n");
-		printf(" SISTEMA DA HAMBURGUERIA\n");
+		printf(" SISTEMA DO RESTAURANTE\n");
 		printf("========================================\n");
 		printf("1 - Cadastrar produto\n");
 		printf("2 - Listar cardápio\n");

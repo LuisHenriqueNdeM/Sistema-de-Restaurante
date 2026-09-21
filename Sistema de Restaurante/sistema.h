@@ -6,9 +6,19 @@ typedef struct PRODUTO{
     char nome[50];
     char categoria[50];
     float preco;
-}produto;
+} produto;
 
-void listarCardapio(produto cardapio[],int qtd);
-void consultar_pedido(PPedido pedido);
+typedef struct PEDIDO{
+    int numero;       // número da mesa (0 = posição livre)
+    produto produto;  // produto pedido
+    int quantidade;
+} Tpedido, *Ppedido, **Mpedido;
+
+void Cadastrar(int totalProdutos, produto *produtos);
+void listarCardapio(produto cardapio[], int qtd);
+void cadastrarPedido(Tpedido pedidos[], produto produtos[], int totalProdutos);
+void consultar_pedido(Ppedido pedido);
+void alterar_pedido(Ppedido pedido, produto cardapio[], int qtdCardapio);
+void voltar_menu();
 
 #endif

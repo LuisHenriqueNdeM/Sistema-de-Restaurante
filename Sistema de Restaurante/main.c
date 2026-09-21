@@ -60,22 +60,32 @@ int main(){
 				produtos = (PRODUTO *) malloc(totalProdutos * sizeof(PRODUTO));
 				Cadastrar(totalProdutos, produto);
             break;
-            case 2:
+            
+			case 2:
             break;
-            case 3:
+            
+			case 3:
             break;
-            case 4:
+            
+			case 4:
             break;
-            case 5:
+           
+			case 5:
 
 				consultar_pedido(pedido);
 				
             break;
-            case 6:
+            
+			case 6:
             break;
-            case 7:
+           
+			case 7:
             break;
+			
+			default:
+			printf("Opção inválida.");
+			break;
         } 
-    }while (opcao != 0); //para o código nã oficar em loop...
+    }while (opcao != 0); //para o código não ficar em loop...
     return 0;
 }

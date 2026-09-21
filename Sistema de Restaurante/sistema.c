@@ -11,3 +11,33 @@ void listarCardapio(produto cardapio[],int qtd){
     }
     printf("--------------------\n");
 }
+
+void consultar_pedido(Pedido pedido){
+    
+    //variaveis
+    int num_mesa, qtde_pedi, j;
+    
+    printf("Digite o número do pedido que deseja consultar: ");
+    scanf("%d", &num_pedi);
+    
+    printf("Pedidos da mesa %d:\n", num_mesa);
+    
+    for(int i = 0; i < qtde_pedi; i++){
+        
+        if(pedido[i].numero == num_mesa){
+            
+            printf("Prato: %s | Quantidade: %d | Preço por unidade: %.2f.\n", pedido[i].produto.nome, pedido[i].quantidade,pedido[i].produto.preco);
+            
+            j = 1;
+            
+        }
+        
+    }
+    
+    if(j != 1){
+        
+        printf("Não tem pedidos registrados na mesa %d.", num_mesa);
+        
+    }
+    
+}

@@ -68,7 +68,7 @@ int main(){
             break;
             case 5:
 
-				
+				consultar_pedido(pedido);
 				
             break;
             case 6:

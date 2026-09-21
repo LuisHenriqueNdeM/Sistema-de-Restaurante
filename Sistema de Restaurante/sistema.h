@@ -9,6 +9,6 @@ typedef struct PRODUTO{
 }produto;
 
 void listarCardapio(produto cardapio[],int qtd);
-void consultar_pedido(Pedido pedido);
+void consultar_pedido(PPedido pedido);
 
 #endif

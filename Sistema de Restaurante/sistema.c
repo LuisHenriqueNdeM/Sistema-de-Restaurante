@@ -19,7 +19,7 @@ void consultar_pedido(Pedido pedido){
     qtde_pedi: guarda o número total de pedidos
     pedido: struct com os dados dos pedidos de cada mesa
     */
-    int num_mesa, qtde_pedi, j;
+    int num_mesa, qtde_pedi = 50, j;
 
     //registro do número da mesa
     

@@ -12,7 +12,7 @@ void listarCardapio(produto cardapio[],int qtd){
     printf("--------------------\n");
 }
 
-void consultar_pedido(Pedido pedido){
+void consultar_pedido(PPedido pedido){
     
     /*variaveis
     num_mesa: guarda o número da mesa para comparar

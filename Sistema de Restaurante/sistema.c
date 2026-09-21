@@ -14,11 +14,19 @@ void listarCardapio(produto cardapio[],int qtd){
 
 void consultar_pedido(Pedido pedido){
     
-    //variaveis
+    /*variaveis
+    num_mesa: guarda o número da mesa para comparar
+    qtde_pedi: guarda o número total de pedidos
+    pedido: struct com os dados dos pedidos de cada mesa
+    */
     int num_mesa, qtde_pedi, j;
+
+    //registro do número da mesa
     
-    printf("Digite o número do pedido que deseja consultar: ");
-    scanf("%d", &num_pedi);
+    printf("Digite o número da mesa que deseja consultar: ");
+    scanf("%d", &num_mesa);
+
+    //exibição de tudo que a mesa pediu
     
     printf("Pedidos da mesa %d:\n", num_mesa);
     
@@ -33,6 +41,8 @@ void consultar_pedido(Pedido pedido){
         }
         
     }
+
+    //tratamento para caso não tiver pedidoos na mesa ou ela ser inexistente
     
     if(j != 1){
         

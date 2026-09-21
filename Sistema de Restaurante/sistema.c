@@ -1,92 +1,108 @@
-#include "sistema.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "sistema.h"
 
-void Cadastrar(int totalProdutos, PRODUTO *produto){ //Cria o cadastro dos produtos
-    
-    for(int i = 0; i < totalProdutos; i++){ //laço para abranger a quantidade informada de produtos
-        printf("\n\tProduto número %d:\n", i + 1);
-
-        printf("Nome do produto: ");
-        getchar(); //limpar o lixo do teclado
-        fgets(produtos[i].nome, sizeof(produto[i].nome), stdin);//função fgets e strcspn para aumentar a dinamicidade e facilidade do código
-        produtos[i].nome[strcspn(produto[i].nome, "\n")] = '\0';
-
-        printf("Código do produto: ");
-        scanf("%d", &produto[i].codigo);
-
-        printf("Categoria do produto: ");
-        getchar();//limpar o lixo do teclado
-        fgets(produto[i].categoria, sizeof(produto[i].categoria), stdin);//função fgets e strcspn para aumentar a dinamicidade e facilidade do código
-        produto[i].categoria[strcspn(produto[i].categoria, "\n")] = '\0';
-
-        printf("Preço do produto: R$ ");
-        scanf("%f", &produto[i].preco);
+void listarCardapio(produto cardapio[],int qtd){
+    printf("--------------------\n");
+    for(int i = 0; i < qtd; i++){
+        printf("Código Interno: %d\n", cardapio[i].codigo_interno);
+        printf("Nome: %s\n", cardapio[i].nome);
+        printf("Categoria: %s\n", cardapio[i].categoria);
+        printf("Preço: %.2f\n", cardapio[i].preco);
     }
+    printf("--------------------\n");
 }
 
-int main(){
-
-    int opcao;
-	int totalProdutos;
-    Produto *produto = 0;
+void consultar_pedido(Pedido pedido){
     
-    // Vetor de pedidos que recebe 50 espaços
-    Ppedido listaPedidos = malloc(50 * sizeof(Tpedido));
-    // Inicializa o vetor de pedidos, definindo numero como 0 para indicar posições vazias
-    for (int i = 0; i < 50; i++) {
-    listaPedidos[i].numero = 0;
+    /*variaveis
+    num_mesa: guarda o número da mesa para comparar
+    qtde_pedi: guarda o número total de pedidos
+    pedido: struct com os dados dos pedidos de cada mesa
+    */
+    int num_mesa, qtde_pedi, j;
+
+    //registro do número da mesa
+    
+    printf("Digite o número da mesa que deseja consultar: ");
+    scanf("%d", &num_mesa);
+
+    //exibição de tudo que a mesa pediu
+    
+    printf("Pedidos da mesa %d:\n", num_mesa);
+    
+    for(int i = 0; i < qtde_pedi; i++){
+        
+        if(pedido[i].numero == num_mesa){
+            
+            printf("Prato: %s | Quantidade: %d | Preço por unidade: %.2f.\n", pedido[i].produto.nome, pedido[i].quantidade,pedido[i].produto.preco);
+            
+            j = 1;
+            
+        }
+        
+    }
+
+    //tratamento para caso não tiver pedidoos na mesa ou ela ser inexistente
+    
+    if(j != 1){
+        
+        printf("Não tem pedidos registrados na mesa %d.", num_mesa);
+        
     }
     
-    //escolha de 'do while' para executar o menu ao menos uma vez
-    
-    do{
-        printf("\n========================================\n");
-		printf(" SISTEMA DO RESTAURANTE\n");
-		printf("========================================\n");
-		printf("1 - Cadastrar produtos\n");
-		printf("2 - Listar cardápio\n");
-		printf("3 - Cadastrar pedidos\n");
-		printf("4 - Calcular pedido\n");
-		printf("5 - Consultar pedido\n");
-		printf("6 - Alteração/Cancelamento\n");
-		printf("7 - Fechamento de conta\n");
-		printf("0 - Sair\n");
-		printf("========================================\n");
-		printf("Escolha uma opção: ");
-		scanf("%d", &opcao);
-		
-		//craição das 'escolhas'
-		
-		switch (opcao) {
-            case 1:
-				printf("\n===========CADASTRO DE PRODUTOS=============\n"); //deixar a interface do código mais organizada
-				printf("Quantas opções de produto terá no restaurante?\n");
-				scanf("%d", &totalProdutos);
-				produtos = (PRODUTO *) malloc(totalProdutos * sizeof(PRODUTO));
-				Cadastrar(totalProdutos, produto);
-            break;
-            case 2:
-            break;
-            case 3:
-            printf("\n===========CADASTRO DE PEDIDOS=============\n");
-            cadastrarPedido(listaPedidos, produtos, totalProdutos);
-            break;
-            case 4:
-            printf("\n===========CALCULO DO PRODUTO=============\n");
-            int nPedido; // Variável que receberá o número do pedido
-            printf("Número da mesa que se deseja calcular:");
-            scanf("%i", &nPedido);
-            calculoPedido(listaPedidos, nPedido);
-            break;
-            case 5:
-            break;
-            case 6:
-            break;
-            case 7:
-            break;
-        } 
-    }while (opcao != 0); //para o código nã oficar em loop...
-    return 0;
+}
+
+
+void cadastrarPedido(Tpedido pedidos[], Produto produtos[],int totalProdutos){
+    int codigo;
+    int quantidade;
+    // Percorre a lista de pedidos
+    for (int i = 0; i < 50; i++) {
+        // Checa que posição esta vaga
+        if (pedidos[i].numero == 0) {
+            pedidos[i].numero = i + 1;
+            printf("Pedido de numero %i\n", pedidos[i].numero);
+            printf("Digite o codigo do produto: ");
+            scanf("%d", &codigo);
+            // Percorre a lista de produtos
+            for (int j = 0; j < totalProdutos; j++) {
+                // Checa se o códido escaneado está na lista de produtos
+                if (produtos[j].codigo == codigo) {
+
+                    pedidos[i].produto = produtos[j];
+
+                    printf("Digite a quantidade: ");
+                    scanf("%d", &quantidade);
+
+                    pedidos[i].quantidade = quantidade;
+
+                    return;
+                }
+            }
+
+            printf("Produto nao encontrado!\n");
+
+            // Libera a posição caso o produto não exista
+            pedidos[i].numero = 0;
+
+            return;
+        }
+    }
+
+    printf("Nao ha espaco para novos pedidos!\n");
+}
+
+
+void calculoPedido(Ppedido listaPedidos, int nPedido){
+    float total;
+    // Verifica se o pedido informado existe
+    if (listaPedidos[nPedido - 1].numero == 0) {
+        printf("Pedido nao encontrado!\n");
+        return;
+    }
+    // Calcula o valor total multiplicando o preco pela quantidade
+    total = listaPedidos[nPedido - 1].produto.preco *
+            listaPedidos[nPedido - 1].quantidade;
+    // Exibe o valor final
+    printf("Valor total do pedido: R$ %.2f\n", total);
 }

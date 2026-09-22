@@ -1,7 +1,6 @@
 #include "sistema.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 int main(){
 
@@ -31,7 +30,8 @@ int main(){
                 printf("\n===========CADASTRO DE PRODUTOS=============\n");
                 printf("Quantas opções de produto terá no restaurante?\n");
                 scanf("%d", &totalProdutos);
-                getchar();
+                getchar(); 
+                free(produtos); // libera o bloco anterior, se existir antes de realocar
                 produtos = (produto *) malloc(totalProdutos * sizeof(produto));
                 Cadastrar(totalProdutos, produtos);
             break;
@@ -39,8 +39,7 @@ int main(){
                 listarCardapio(produtos, totalProdutos);
             break;
             case 3:
-            printf("\n===========CADASTRO DE PEDIDOS=============\n");
-            cadastrarPedido(pedidos, produtos, totalProdutos);
+                cadastrarPedido(pedidos, produtos, totalProdutos);
             break;
             case 4:
             printf("\n===========CALCULO DO PRODUTO=============\n");
@@ -57,6 +56,8 @@ int main(){
             break;
             case 7:
             break;
+            default:
+            printf("Opção Inválida!");
         }
     } while (opcao != 0);
 

@@ -9,7 +9,7 @@ typedef struct PRODUTO{
 } produto;
 
 typedef struct PEDIDO{
-    int numero;       // número da mesa (0 = posição livre)
+    int numero;       // número da mesa (0 = posição livre) 
     produto produto;  // produto pedido
     int quantidade;
 } Tpedido, *Ppedido, **Mpedido;

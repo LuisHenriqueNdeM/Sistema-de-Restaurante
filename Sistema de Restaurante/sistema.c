@@ -186,19 +186,24 @@ void alterar_pedido(Ppedido pedido, produto cardapio[], int qtdCardapio) {
 	}
 	voltar_menu();
 }
-void calculoPedido(Tpedido pedidos[], int nPedido){
-    float total;
-    // Verifica se o pedido informado existe
-    if (pedidos[nPedido - 1].numero == 0) {
-        printf("Pedido nao encontrado!\n");
-        voltar_menu();
-        return;
+void calculoPedido(Tpedido pedidos[], int nPedido) {
+    float total = 0.0;
+    int encontrou = 0;
+
+    // Soma o valor de todos os produtos associados ao pedido informado
+    for (int i = 0; i < 50; i++) {
+        if (pedidos[i].numero == nPedido) {
+            total += pedidos[i].produto.preco * pedidos[i].quantidade;
+            encontrou = 1;
+        }
     }
-    // Calcula o valor total multiplicando o preco pela quantidade
-    total = pedidos[nPedido - 1].produto.preco *
-            pedidos[nPedido - 1].quantidade;
-    // Exibe o valor final
-    printf("Valor total do pedido: R$ %.2f\n", total);
+
+    if (!encontrou) {
+        printf("\nNenhum pedido encontrado para a mesa %d!\n", nPedido);
+    } else {
+        printf("\nValor total da conta da mesa %d: R$ %.2f\n", nPedido, total);
+    }
+    
     voltar_menu();
     return;
 }

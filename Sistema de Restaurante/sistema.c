@@ -10,7 +10,7 @@ void voltar_menu() {
 	getchar();
 }
 
-void Cadastrar(int totalProdutos, produto *produtos){ //Cria o cadastro dos produtos
+void Cadastrar(int totalProdutos, produto *produtos){ //Cria o cadastro dos produtos 
 
     for(int i = 0; i < totalProdutos; i++){
         printf("\n\tProduto número %d:\n", i + 1);

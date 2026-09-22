@@ -44,7 +44,7 @@ int main(){
             case 4:
             printf("\n===========CALCULO DO PRODUTO=============\n");
             int nPedido; // Variável que receberá o número do pedido
-            printf("Número da mesa que se deseja calcular:");
+            printf("Número do pedido que se deseja calcular:");
             scanf("%i", &nPedido);
             calculoPedido(pedidos, nPedido);
             break;

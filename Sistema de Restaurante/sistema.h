@@ -20,5 +20,6 @@ void cadastrarPedido(Tpedido pedidos[], produto produtos[], int totalProdutos);
 void consultar_pedido(Ppedido pedido);
 void alterar_pedido(Ppedido pedido, produto cardapio[], int qtdCardapio);
 void voltar_menu();
+void calculoPedido(Tpedido pedidos[], int nPedido);
 
 #endif

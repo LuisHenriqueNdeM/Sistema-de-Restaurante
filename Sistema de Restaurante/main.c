@@ -55,6 +55,8 @@ int main(){
                 alterar_pedido(pedidos, produtos, totalProdutos);
             break;
             case 7:
+                printf("\n===========FECHAMENTO DE CONTA=============\n");
+                fecharConta(pedidos, 50);
             break;
             default:
             printf("Opção Inválida!");

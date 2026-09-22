@@ -207,3 +207,48 @@ void calculoPedido(Tpedido pedidos[], int nPedido) {
     voltar_menu();
     return;
 }
+
+void fecharConta(Tpedido pedidos[], int qtdPedidos) {
+    int num_mesa, opcao, encontrou = 0;
+    float total = 0.0f;
+
+    printf("Digite o número da mesa para fechar a conta: ");
+    scanf("%d", &num_mesa);
+
+    printf("\n========== CONTA DA MESA %d ==========\n", num_mesa);
+
+    for (int i = 0; i < qtdPedidos; i++) {
+        if (pedidos[i].numero == num_mesa) {
+            float subtotal = pedidos[i].produto.preco * pedidos[i].quantidade;
+            printf("%-20s x%-3d  ->  R$ %.2f\n",
+                   pedidos[i].produto.nome, pedidos[i].quantidade, subtotal);
+            total += subtotal;
+            encontrou = 1;
+        }
+    }
+
+    if (!encontrou) {
+        printf("Nenhum pedido encontrado para a mesa %d.\n", num_mesa);
+        voltar_menu();
+        return;
+    }
+
+    printf("---------------------------------------\n");
+    printf("VALOR TOTAL: R$ %.2f\n", total);
+    printf("========================================\n");
+
+    printf("\nDeseja encerrar a mesa (liberar para novos pedidos)? (1-Sim / 0-Não): ");
+    scanf("%d", &opcao);
+
+    if (opcao == 1) {
+        for (int i = 0; i < qtdPedidos; i++) {
+            if (pedidos[i].numero == num_mesa) {
+                pedidos[i].numero = 0;
+                pedidos[i].quantidade = 0;
+            }
+        }
+        printf("Mesa %d encerrada com sucesso!\n", num_mesa);
+    }
+
+    voltar_menu();
+}
